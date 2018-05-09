@@ -11,6 +11,8 @@
         <module>java-core-io</module>
         <module>java-core-concurrent</module>
         <module>java-core-collection</module>
+        <module>java-core-base</module>
+        <module>java-framework-dubbo</module>
     </modules>
     <packaging>pom</packaging>
 

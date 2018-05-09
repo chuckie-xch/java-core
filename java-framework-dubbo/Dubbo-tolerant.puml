@@ -1,0 +1,7 @@
+@startuml
+InvokerInvocationHandler -> MockClusterInvoker: invoke
+MockClusterInvoker -> AbstractClusterInvoker: list
+AbstractClusterInvoker -> AbstractDirectory: list
+AbstractDirectory -> RegistryDrectory: doList
+
+@enduml
