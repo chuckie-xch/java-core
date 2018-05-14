@@ -13,6 +13,7 @@
         <module>java-core-collection</module>
         <module>java-core-base</module>
         <module>java-framework-dubbo</module>
+        <module>java-framework-spring-security</module>
     </modules>
     <packaging>pom</packaging>
 
