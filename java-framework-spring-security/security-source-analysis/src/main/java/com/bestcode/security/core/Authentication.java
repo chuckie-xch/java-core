@@ -1,6 +1,7 @@
 package com.bestcode.security.core;
 
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.Collection;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Collection;
  * @see
  * @since 2018.05.14
  */
-public interface Authentication extends Serializable{
+public interface Authentication extends Principal,Serializable{
 
     /**
      * 获取权限
@@ -30,4 +31,12 @@ public interface Authentication extends Serializable{
      * @return
      */
     Object getPrincipal();
+
+    /**
+     * 获取主体名字
+     * @return
+     */
+    String getName();
+
+    Object getCredentials();
 }
