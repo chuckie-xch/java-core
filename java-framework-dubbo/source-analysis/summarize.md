@@ -1,0 +1,18 @@
+## dubbo集群容错架构
+
+调用dubbo接口服务方法时，会执行基于jdk动态代理的代理类InvokerInvocationHandler对象的invoke方法，实际上会调用MockClusterInvoker的invoke方法，通过Directory找到集群中的所有invokers,然后通过Router路由挑选出能正常执行的invokers，如果此时又多个能正常执行的Invoker，会调用loadBalance根据配置的负载均衡策略挑选出需要执行那个invoker，在集群调用失败时，dubbo提供了多种集群容错方案，默认为Failover（失败重试），此外还有Failfast（快速失败），Failsafe（失败安全），Failback（失败回退），FokingClust（并行调用，有一个成功就返回），BroadcastCluster（广播调用，任意一个报错则报错）。
+
+
+
+## Directory
+
+Directory代表一个Invoker列表，有两个实现，分别是StaticDirectory，RegistryDiretory,一个是静态的，一个是动态的，RegistryDirectory实现了NotifyListener接口，接受注册中心服务变更的通知，从而改变动态的改变invoker列表。RegistryDirectory通过内部的methodInvokerMap获取invoker列表。当注册中心变化时会通过notify通知RegistryDirectory来更新methodInvokerMap和urlInvokerMap。
+
+
+
+## Router
+
+Router有三个实现，分别是MockInvokersSelector，ConditionRouter和ScriptRouter（脚本路由），默认会调用MockInvokersSelector的getNormalInvokes即获取非mock协议的invokers，
+
+
+
