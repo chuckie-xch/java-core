@@ -1,7 +1,7 @@
-package com.bestcode.spring.ioc;
+package com.bestcode.spring.ioc.beans;
 
 
-import com.bestcode.spring.ioc.io.ResourceLoader;
+import com.bestcode.spring.ioc.beans.io.ResourceLoader;
 
 import java.util.HashMap;
 import java.util.Map;

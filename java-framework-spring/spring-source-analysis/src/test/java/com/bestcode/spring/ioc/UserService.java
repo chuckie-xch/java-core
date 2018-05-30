@@ -6,15 +6,9 @@ package com.bestcode.spring.ioc;
  * @see
  * @since 2018.05.29
  */
-public class UserService {
+public interface UserService {
 
-    private String text;
+    void helloWorld();
 
-    public void helloWorld() {
-        System.out.println(text);
-    }
 
-    public void setText(String text) {
-        this.text = text;
-    }
 }

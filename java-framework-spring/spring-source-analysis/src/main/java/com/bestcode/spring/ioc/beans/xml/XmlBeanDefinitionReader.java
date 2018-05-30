@@ -1,9 +1,10 @@
-package com.bestcode.spring.ioc.xml;
+package com.bestcode.spring.ioc.beans.xml;
 
-import com.bestcode.spring.ioc.AbstractBeanDefinitionReader;
-import com.bestcode.spring.ioc.BeanDefinition;
-import com.bestcode.spring.ioc.PropertyValue;
-import com.bestcode.spring.ioc.io.ResourceLoader;
+import com.bestcode.spring.ioc.beans.AbstractBeanDefinitionReader;
+import com.bestcode.spring.ioc.beans.BeanDefinition;
+import com.bestcode.spring.ioc.beans.BeanReference;
+import com.bestcode.spring.ioc.beans.PropertyValue;
+import com.bestcode.spring.ioc.beans.io.ResourceLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -59,7 +60,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         String className = ele.getAttribute("class");
         BeanDefinition beanDefinition = new BeanDefinition();
         processProperty(ele, beanDefinition);
-
+        beanDefinition.setBeanClassName(className);
+        getRegistry().put(name, beanDefinition);
     }
 
     private void processProperty(Element ele, BeanDefinition beanDefinition) {
@@ -70,7 +72,16 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 Element propertyEle = (Element) node;
                 String name = propertyEle.getAttribute("name");
                 String value = propertyEle.getAttribute("value");
-                beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                if (value != null && value.length() > 0) {
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                } else {
+                    String ref = propertyEle.getAttribute("ref");
+                    if (ref != null && ref.length() > 0) {
+                        BeanReference beanReference = new BeanReference();
+                        beanReference.setName(ref);
+                        beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
+                    }
+                }
             }
         }
     }

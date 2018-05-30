@@ -1,4 +1,4 @@
-package com.bestcode.spring.ioc;
+package com.bestcode.spring.ioc.beans;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.bestcode.spring.ioc;
+package com.bestcode.spring.ioc.beans;
 
 /**
  * @author <a href="mailto:1205241831@qq.com">Xch</a>

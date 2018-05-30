@@ -1,8 +1,9 @@
-package com.bestcode.spring.ioc.factory;
+package com.bestcode.spring.ioc.beans.factory;
 
-import com.bestcode.spring.ioc.BeanDefinition;
-import com.bestcode.spring.ioc.PropertyValue;
-import com.bestcode.spring.ioc.PropertyValues;
+import com.bestcode.spring.ioc.beans.BeanDefinition;
+import com.bestcode.spring.ioc.beans.BeanReference;
+import com.bestcode.spring.ioc.beans.PropertyValue;
+import com.bestcode.spring.ioc.beans.PropertyValues;
 
 import java.lang.reflect.Field;
 
@@ -18,6 +19,7 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
     @Override
     protected Object doCreateBean(BeanDefinition beanDefinition) throws Exception {
         Object bean = createBeanInstance(beanDefinition);
+        beanDefinition.setBean(bean);
         applyPropertyValues(bean, beanDefinition);
         return bean;
     }
@@ -27,7 +29,12 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
         for (PropertyValue propertyValue : propertyValues.getPropertyValueList()) {
             Field field = beanDefinition.getBeanClass().getDeclaredField(propertyValue.getName());
             field.setAccessible(true);
-            field.set(bean, propertyValue.getValue());
+            Object value = propertyValue.getValue();
+            if (value instanceof BeanReference) {
+                BeanReference beanReference = (BeanReference) value;
+                value = getBean(beanReference.getName());
+            }
+            field.set(bean,value);
         }
     }
 

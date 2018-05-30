@@ -1,4 +1,4 @@
-package com.bestcode.spring.ioc.io;
+package com.bestcode.spring.ioc.beans.io;
 
 import java.io.InputStream;
 

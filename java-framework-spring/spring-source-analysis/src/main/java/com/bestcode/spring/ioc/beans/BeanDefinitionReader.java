@@ -1,4 +1,4 @@
-package com.bestcode.spring.ioc;
+package com.bestcode.spring.ioc.beans;
 
 /**
  * bean配置元数据解析
