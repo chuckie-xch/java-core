@@ -4,8 +4,10 @@ import com.bestcode.spring.ioc.beans.BeanDefinition;
 import com.bestcode.spring.ioc.beans.BeanReference;
 import com.bestcode.spring.ioc.beans.PropertyValue;
 import com.bestcode.spring.ioc.beans.PropertyValues;
+import com.bestcode.spring.ioc.context.BeanFactoryAware;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * @author <a href="mailto:1205241831@qq.com">Xch</a>
@@ -25,16 +27,27 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
     }
 
     private void applyPropertyValues(Object bean, BeanDefinition beanDefinition) throws Exception {
+        if (bean instanceof BeanFactoryAware) {
+            ((BeanFactoryAware) bean).setBeanFactory(this);
+        }
         PropertyValues propertyValues = beanDefinition.getPropertyValues();
         for (PropertyValue propertyValue : propertyValues.getPropertyValueList()) {
-            Field field = beanDefinition.getBeanClass().getDeclaredField(propertyValue.getName());
-            field.setAccessible(true);
             Object value = propertyValue.getValue();
             if (value instanceof BeanReference) {
                 BeanReference beanReference = (BeanReference) value;
                 value = getBean(beanReference.getName());
             }
-            field.set(bean,value);
+
+            try {
+                Method declaredMethod = bean.getClass().getDeclaredMethod("set" + propertyValue.getName().substring(0, 1)
+                        .toUpperCase() + propertyValue.getName().substring(1), value.getClass());
+                declaredMethod.setAccessible(true);
+                declaredMethod.invoke(bean, value);
+            } catch (NoSuchMethodException e) {
+                Field field = beanDefinition.getBeanClass().getDeclaredField(propertyValue.getName());
+                field.setAccessible(true);
+                field.set(bean, value);
+            }
         }
     }
 

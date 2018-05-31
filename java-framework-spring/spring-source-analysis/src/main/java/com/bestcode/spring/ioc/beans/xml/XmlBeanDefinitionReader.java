@@ -56,7 +56,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     }
 
     private void processBeanDefinition(Element ele) {
-        String name = ele.getAttribute("name");
+        String name = ele.getAttribute("id");
         String className = ele.getAttribute("class");
         BeanDefinition beanDefinition = new BeanDefinition();
         processProperty(ele, beanDefinition);

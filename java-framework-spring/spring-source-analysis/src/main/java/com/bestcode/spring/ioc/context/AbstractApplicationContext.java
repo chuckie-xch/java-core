@@ -1,7 +1,10 @@
 package com.bestcode.spring.ioc.context;
 
 import com.bestcode.spring.ioc.beans.BeanDefinition;
+import com.bestcode.spring.ioc.beans.BeanPostProcessor;
 import com.bestcode.spring.ioc.beans.factory.AbstractBeanFactory;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:1205241831@qq.com">Xch</a>
@@ -18,8 +21,23 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
     }
 
     public void refresh() throws Exception {
-
+        loadBeanDefinitions(beanFactory);
+        registerBeanPostProcessors(beanFactory);
+        onRefresh();
     }
+
+    private void onRefresh() throws Exception {
+        beanFactory.preInstantiateSingletons();
+    }
+
+    private void registerBeanPostProcessors(AbstractBeanFactory beanFactory) throws Exception {
+        List<BeanPostProcessor> postProcessors = beanFactory.getBeansForType(BeanPostProcessor.class);
+        for (BeanPostProcessor postProcessor: postProcessors) {
+            beanFactory.addBeanProstProcessor(postProcessor);
+        }
+    }
+
+    protected abstract void loadBeanDefinitions(AbstractBeanFactory beanFactory) throws Exception;
 
     public Object getBean(String name) throws Exception {
         return beanFactory.getBean(name);

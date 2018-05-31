@@ -10,20 +10,34 @@ package com.bestcode.spring.ioc.aop;
  */
 public class TargetSource {
 
-    private Class targetClass;
+    private Class<?> targetClass;
+
+    private Class<?>[] interfaces;
 
     private Object target;
 
-    public TargetSource(Class targetClass, Object target) {
+    public TargetSource(Object target, Class<?> targetClass, Class<?>... interfaces) {
         this.targetClass = targetClass;
         this.target = target;
     }
 
-    public Class getTargetClass() {
+    public Class<?> getTargetClass() {
         return targetClass;
+    }
+
+    public void setTargetClass(Class<?> targetClass) {
+        this.targetClass = targetClass;
     }
 
     public Object getTarget() {
         return target;
+    }
+
+    public void setTarget(Object target) {
+        this.target = target;
+    }
+
+    public Class<?>[] getInterfaces() {
+        return interfaces;
     }
 }

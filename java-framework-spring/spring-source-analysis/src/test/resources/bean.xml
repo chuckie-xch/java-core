@@ -8,13 +8,21 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-    <bean name="userService" class="com.bestcode.spring.ioc.UserServiceImpl">
+    <bean id="userService" class="com.bestcode.spring.ioc.UserServiceImpl">
         <property name="text" value="helloWorld" ></property>
         <property name="printService" ref="printService"></property>
     </bean>
 
-    <bean name="printService" class="com.bestcode.spring.ioc.PrintService" >
+    <bean id="printService" class="com.bestcode.spring.ioc.PrintServiceImpl" >
         <property name="userService" ref="userService" ></property>
     </bean>
 
+    <bean id="timeInterceptor" class="com.bestcode.spring.aop.TimeInterceptor" />
+
+    <bean id="autoProxyCreator" class="com.bestcode.spring.ioc.aop.AspectJAwareAdvisorAutoProxyCreator" />
+
+    <bean id="aspectJAspect" class="com.bestcode.spring.ioc.aop.AspectJExpressionPointcutAdvisor" >
+        <property name="advice" ref="timeInterceptor" ></property>
+        <property name="expression" value="execution(* com.bestcode.spring.ioc.*.*(..))" ></property>
+    </bean>
 </beans>

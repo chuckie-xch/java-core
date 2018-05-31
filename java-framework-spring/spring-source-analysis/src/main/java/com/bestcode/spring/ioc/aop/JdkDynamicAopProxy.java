@@ -23,8 +23,8 @@ public class JdkDynamicAopProxy implements AopProxy, InvocationHandler {
     }
 
     public Object getProxy() {
-        return Proxy.newProxyInstance(getClass().getClassLoader(), new Class[]{advised.getTargetSource()
-                .getTargetClass()}, this);
+        return Proxy.newProxyInstance(getClass().getClassLoader(), advised.getTargetSource()
+                .getTargetClass(), this);
     }
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

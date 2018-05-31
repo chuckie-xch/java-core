@@ -35,7 +35,8 @@ public class BeanFactoryTest {
 
     @Test
     public void testApplicationContext() throws Exception {
-        ApplicationContext context = new ClassPathXmlApplicationContext("bean.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("bean.xml");
+        context.refresh();
         UserService userService = (UserService) context.getBean("userService");
         userService.helloWorld();
     }

@@ -10,7 +10,7 @@ public class UserServiceImpl implements UserService {
 
     private String text;
 
-    private PrintService printService;
+    private PrintServiceImpl printService;
 
     public void helloWorld() {
         printService.pint(text);
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
         this.text = text;
     }
 
-    public void setPrintService(PrintService printService) {
+    public void setPrintService(PrintServiceImpl printService) {
         this.printService = printService;
     }
 }

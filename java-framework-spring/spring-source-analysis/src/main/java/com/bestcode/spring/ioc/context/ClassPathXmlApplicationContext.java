@@ -30,8 +30,9 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext{
         refresh();
     }
 
+
     @Override
-    public void refresh() throws Exception {
+    protected void loadBeanDefinitions(AbstractBeanFactory beanFactory) throws Exception {
         XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
         xmlBeanDefinitionReader.loadBeanDefinitions(configLocation);
         for (Map.Entry<String, BeanDefinition> entry: xmlBeanDefinitionReader.getRegistry().entrySet()) {
