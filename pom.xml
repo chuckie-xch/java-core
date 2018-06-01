@@ -16,6 +16,7 @@
         <module>java-framework-spring-security</module>
         <module>java-framework-spring</module>
         <module>java-design-patterns</module>
+        <module>java-framework-xxl-job</module>
     </modules>
     <packaging>pom</packaging>
 
