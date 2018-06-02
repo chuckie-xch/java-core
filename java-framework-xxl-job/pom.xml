@@ -19,6 +19,7 @@
 
     <properties>
         <xxl-job.verison>1.9.1</xxl-job.verison>
+        <jetty-server.version>9.2.24.v20180105</jetty-server.version>
     </properties>
 
     <dependencyManagement>
