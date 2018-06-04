@@ -18,6 +18,7 @@
         <module>java-design-patterns</module>
         <module>java-framework-xxl-job</module>
         <module>java-component-task</module>
+        <module>java-framework-spring-cloud</module>
     </modules>
     <packaging>pom</packaging>
 
