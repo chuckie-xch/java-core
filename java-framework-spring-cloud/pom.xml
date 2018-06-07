@@ -15,6 +15,7 @@
         <module>cloud-eureka-server</module>
         <module>cloud-eureka-client</module>
         <module>mr-product</module>
+        <module>mr-order</module>
     </modules>
 
     <properties>
