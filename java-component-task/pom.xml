@@ -17,6 +17,7 @@
         <module>component-task-spring</module>
         <module>component-task-quartz</module>
         <module>component-task-spring-quartz</module>
+        <module>component-task-elastic-job-springboot</module>
     </modules>
     <packaging>pom</packaging>
 
