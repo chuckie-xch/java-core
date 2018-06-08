@@ -38,13 +38,13 @@ public class ProductController {
         List<Integer> categoryTypeList = productInfos.stream().map(ProductInfo::getCategoryType).collect(Collectors
                 .toList());
         List<ProductCategory> categoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
-        List<ProductVO> productVOList= new ArrayList<ProductVO>();
-        for (ProductCategory productCategory: categoryList) {
+        List<ProductVO> productVOList = new ArrayList<ProductVO>();
+        for (ProductCategory productCategory : categoryList) {
             ProductVO productVO = new ProductVO();
             productVO.setCategoryName(productCategory.getCategoryName());
             productVO.setCategoryType(productCategory.getCategoryType());
-            List<ProductInfoVO> productInfoVOS= new ArrayList<ProductInfoVO>();
-            for (ProductInfo productInfo: productInfos) {
+            List<ProductInfoVO> productInfoVOS = new ArrayList<ProductInfoVO>();
+            for (ProductInfo productInfo : productInfos) {
                 if (productInfo.getCategoryType().equals(productCategory.getCategoryType())) {
                     ProductInfoVO productInfoVO = new ProductInfoVO();
                     BeanUtils.copyProperties(productInfo, productInfoVO);
