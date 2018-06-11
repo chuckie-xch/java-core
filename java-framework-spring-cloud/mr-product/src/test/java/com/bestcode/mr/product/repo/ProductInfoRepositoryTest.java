@@ -1,6 +1,7 @@
 package com.bestcode.mr.product.repo;
 
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.bestcode.mr.product.model.entity.ProductInfo;
@@ -21,6 +22,14 @@ public class ProductInfoRepositoryTest {
     @Test
     public void findByProductStatus() {
         List<ProductInfo> list = productInfoRepository.findByProductStatus(0);
-        Assert.assertTrue(list.size()>0);
+        Assert.assertTrue(list.size() > 0);
     }
+
+    @Test
+    public void findByProductIdIn() {
+        List<ProductInfo> list = productInfoRepository.findByProductIdIn(Arrays.asList("157875227953464068",
+                "157875196366160022"));
+        Assert.assertTrue(list.size() > 0);
+    }
+
 }

@@ -1,5 +1,11 @@
 package com.bestcode.mr.order.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
+import com.bestcode.mr.order.client.ProductClient;
+import com.bestcode.mr.order.model.dto.CartDTO;
+import com.bestcode.mr.order.model.entity.ProductInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -16,11 +22,14 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class ClientController {
 
-//    @Autowired
-//    private LoadBalancerClient loadBalancerClient;
+    //    @Autowired
+    private LoadBalancerClient loadBalancerClient;
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private ProductClient productClient;
 
     @GetMapping("/getProductMsg")
     public String getProductMsg() {
@@ -37,8 +46,25 @@ public class ClientController {
         /**
          * 第三种方式，见RestTemplateConfig
          */
-        String response = restTemplate.getForObject("http://mr-product/msg", String.class);
+//        String response = restTemplate.getForObject("http://mr-product/msg", String.class);
+        /**
+         * 第四种方式，使用feignClient
+         */
+        String response = productClient.productMsg();
         log.info("response={}", response);
         return response;
+    }
+
+    @GetMapping("/getProductList")
+    public String getProductList() {
+        List<ProductInfo> productInfoList = productClient.listForOrder(Arrays.asList("157875196366160022"));
+        log.info("response={}", productInfoList);
+        return "ok";
+    }
+
+    @GetMapping("/productDecreaseStock")
+    public String decreaseStock() {
+        productClient.decreaseStock(Arrays.asList(new CartDTO("157875196366160022", 2)));
+        return "ok";
     }
 }
