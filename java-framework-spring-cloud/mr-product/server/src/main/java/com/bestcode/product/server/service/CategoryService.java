@@ -2,7 +2,8 @@ package com.bestcode.product.server.service;
 
 import java.util.List;
 
-import com.bestcode.mr.product.model.entity.ProductCategory;
+import com.bestcode.product.server.model.entity.ProductCategory;
+
 
 /**
  * @author xch

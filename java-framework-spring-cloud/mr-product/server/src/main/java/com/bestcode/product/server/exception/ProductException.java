@@ -1,6 +1,7 @@
 package com.bestcode.product.server.exception;
 
-import com.bestcode.mr.product.enums.ResultEnum;
+
+import com.bestcode.product.server.enums.ResultEnum;
 
 /**
  * @author xch

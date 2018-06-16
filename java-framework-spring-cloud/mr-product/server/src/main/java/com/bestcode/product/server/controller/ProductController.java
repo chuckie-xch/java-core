@@ -5,12 +5,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+import com.bestcode.product.common.DecreaseStockInput;
+import com.bestcode.product.common.ProductInfoOutput;
 import com.bestcode.product.server.model.ResultVO;
+import com.bestcode.product.server.model.dto.CartDTO;
 import com.bestcode.product.server.model.entity.ProductCategory;
 import com.bestcode.product.server.model.entity.ProductInfo;
+import com.bestcode.product.server.model.vo.ProductInfoVO;
 import com.bestcode.product.server.model.vo.ProductVO;
 import com.bestcode.product.server.service.CategoryService;
 import com.bestcode.product.server.service.ProductService;
+import com.bestcode.product.server.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
  * @author xch
  * @create 2018-06-06 22:43
  **/
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -61,16 +67,17 @@ public class ProductController {
      * @return
      */
     @PostMapping("/listForOrder")
-    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) {
+    public List<ProductInfoOutput> listForOrder(@RequestBody List<String> productIdList) {
         return productService.findList(productIdList);
     }
 
     /**
      * 扣库存
-     * @param cartDTOList
+     *
+     * @param decreaseStockInputList
      */
     @PostMapping("/decreaseStock")
-    public void decreaseStock(@RequestBody List<CartDTO> cartDTOList) {
-        productService.decreaseStock(cartDTOList);
+    public void decreaseStock(@RequestBody List<DecreaseStockInput> decreaseStockInputList) {
+        productService.decreaseStock(decreaseStockInputList);
     }
 }

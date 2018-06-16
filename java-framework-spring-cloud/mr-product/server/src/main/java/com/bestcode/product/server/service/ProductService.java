@@ -2,8 +2,11 @@ package com.bestcode.product.server.service;
 
 import java.util.List;
 
-import com.bestcode.mr.product.model.dto.CartDTO;
-import com.bestcode.mr.product.model.entity.ProductInfo;
+import com.bestcode.product.common.DecreaseStockInput;
+import com.bestcode.product.common.ProductInfoOutput;
+import com.bestcode.product.server.model.dto.CartDTO;
+import com.bestcode.product.server.model.entity.ProductInfo;
+
 
 /**
  * @author xch
@@ -18,11 +21,11 @@ public interface ProductService {
      * @param productIdList
      * @return
      */
-    List<ProductInfo> findList(List<String> productIdList);
+    List<ProductInfoOutput> findList(List<String> productIdList);
 
     /**
      * 扣库存
-     * @param cartDTOList
+     * @param decreaseStockInputList
      */
-    void decreaseStock(List<CartDTO> cartDTOList);
+    void decreaseStock(List<DecreaseStockInput> decreaseStockInputList);
 }

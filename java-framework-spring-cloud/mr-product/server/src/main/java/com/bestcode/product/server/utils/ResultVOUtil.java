@@ -1,6 +1,7 @@
 package com.bestcode.product.server.utils;
 
-import com.bestcode.mr.product.model.ResultVO;
+
+import com.bestcode.product.server.model.ResultVO;
 
 /**
  * @author xch

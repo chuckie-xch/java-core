@@ -2,7 +2,7 @@ package com.bestcode.product.server.repo;
 
 import java.util.List;
 
-import com.bestcode.mr.product.model.entity.ProductCategory;
+import com.bestcode.product.server.model.entity.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -3,9 +3,11 @@ package com.bestcode.mr.order.controller;
 import java.util.Arrays;
 import java.util.List;
 
-import com.bestcode.mr.order.client.ProductClient;
 import com.bestcode.mr.order.model.dto.CartDTO;
 import com.bestcode.mr.order.model.entity.ProductInfo;
+import com.bestcode.product.client.ProductClient;
+import com.bestcode.product.common.DecreaseStockInput;
+import com.bestcode.product.common.ProductInfoOutput;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -18,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
  * @author xch
  * @create 2018-06-08 23:21
  **/
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @RestController
 @Slf4j
 public class ClientController {
@@ -57,14 +60,14 @@ public class ClientController {
 
     @GetMapping("/getProductList")
     public String getProductList() {
-        List<ProductInfo> productInfoList = productClient.listForOrder(Arrays.asList("157875196366160022"));
+        List<ProductInfoOutput> productInfoList = productClient.listForOrder(Arrays.asList("157875196366160022"));
         log.info("response={}", productInfoList);
         return "ok";
     }
 
     @GetMapping("/productDecreaseStock")
     public String decreaseStock() {
-        productClient.decreaseStock(Arrays.asList(new CartDTO("157875196366160022", 2)));
+        productClient.decreaseStock(Arrays.asList(new DecreaseStockInput("157875196366160022", 2)));
         return "ok";
     }
 }

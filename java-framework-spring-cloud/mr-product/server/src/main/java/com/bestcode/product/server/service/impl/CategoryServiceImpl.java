@@ -2,9 +2,10 @@ package com.bestcode.product.server.service.impl;
 
 import java.util.List;
 
-import com.bestcode.mr.product.model.entity.ProductCategory;
-import com.bestcode.mr.product.repo.ProductCategoryRepository;
-import com.bestcode.mr.product.service.CategoryService;
+
+import com.bestcode.product.server.model.entity.ProductCategory;
+import com.bestcode.product.server.repo.ProductCategoryRepository;
+import com.bestcode.product.server.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
 
+    @Override
     public List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList) {
         return productCategoryRepository.findByCategoryTypeIn(categoryTypeList);
     }
