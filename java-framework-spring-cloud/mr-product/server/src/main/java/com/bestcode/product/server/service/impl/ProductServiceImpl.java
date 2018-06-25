@@ -13,6 +13,9 @@ import com.bestcode.product.server.exception.ProductException;
 import com.bestcode.product.server.model.entity.ProductInfo;
 import com.bestcode.product.server.repo.ProductInfoRepository;
 import com.bestcode.product.server.service.ProductService;
+import com.bestcode.product.server.utils.JsonUtil;
+import com.rabbitmq.tools.json.JSONUtil;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductInfoRepository productInfoRepository;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
     @Override
     public List<ProductInfo> findUpAll() {
@@ -61,6 +67,9 @@ public class ProductServiceImpl implements ProductService {
             }
             productInfo.setProductStock(result);
             productInfoRepository.save(productInfo);
+            ProductInfoOutput productInfoOutput = new ProductInfoOutput();
+            BeanUtils.copyProperties(productInfo, productInfoOutput);
+            amqpTemplate.convertAndSend("productInfo",JsonUtil.toJson(productInfoOutput));
         }
     }
 }

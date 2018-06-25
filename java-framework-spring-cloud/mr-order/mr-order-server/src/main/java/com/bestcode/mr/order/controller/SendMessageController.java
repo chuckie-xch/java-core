@@ -1,5 +1,6 @@
 package com.bestcode.mr.order.controller;
 
+import com.bestcode.mr.order.model.dto.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.support.MessageBuilder;
@@ -20,6 +21,9 @@ public class SendMessageController {
     @GetMapping("/sendMessage")
     public void process() {
         String message = "sendMessage";
-        source.output().send(MessageBuilder.withPayload(message).build());
+        OrderDTO  orderDto = new OrderDTO();
+        orderDto.setBuyerName("张三丰");
+        orderDto.setBuyerOpenid("openId");
+        source.output().send(MessageBuilder.withPayload(orderDto).build());
     }
 }
