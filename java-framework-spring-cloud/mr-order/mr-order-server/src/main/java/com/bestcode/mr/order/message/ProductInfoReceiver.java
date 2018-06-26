@@ -1,7 +1,10 @@
 package com.bestcode.mr.order.message;
 
+import java.util.List;
+
 import com.bestcode.mr.order.utils.JsonUtil;
 import com.bestcode.product.common.ProductInfoOutput;
+import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -24,9 +27,13 @@ public class ProductInfoReceiver {
 
     @RabbitListener(queuesToDeclare = @Queue("productInfo"))
     public void process(String message) {
-        ProductInfoOutput productInfoOutput = (ProductInfoOutput) JsonUtil.fromJson(message, ProductInfoOutput.class);
-        log.info("从队列【{}】接收到消息{}", "productInfo", productInfoOutput);
-        redisTemplate.opsForValue().set(String.format(PRODUCT_STOCK_TEMPLATE, productInfoOutput.getProductId()),
-                String.valueOf(productInfoOutput.getProductStock()));
+        List<ProductInfoOutput> productInfoOutputList = (List<ProductInfoOutput>) JsonUtil.fromJson(message, new
+                TypeReference<List<ProductInfoOutput>>() {
+                });
+        log.info("从队列【{}】接收到消息{}", "productInfo", productInfoOutputList);
+        for (ProductInfoOutput productInfoOutput : productInfoOutputList) {
+            redisTemplate.opsForValue().set(String.format(PRODUCT_STOCK_TEMPLATE, productInfoOutput.getProductId()),
+                    String.valueOf(productInfoOutput.getProductStock()));
+        }
     }
 }

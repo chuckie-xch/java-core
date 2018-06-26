@@ -3,6 +3,7 @@ package com.bestcode.mr.order.utils;
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -15,6 +16,7 @@ public class JsonUtil {
 
     /**
      * 转换为json字符串
+     *
      * @param object
      * @return
      */
@@ -30,6 +32,15 @@ public class JsonUtil {
     public static Object fromJson(String string, Class classType) {
         try {
             return objectMapper.readValue(string, classType);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object fromJson(String string, TypeReference typeReference) {
+        try {
+            return objectMapper.readValue(string, typeReference);
         } catch (IOException e) {
             e.printStackTrace();
         }
