@@ -17,6 +17,7 @@
         <module>mr-product</module>
         <module>mr-order</module>
         <module>cloud-config-server</module>
+        <module>cloud-api-gateway</module>
     </modules>
 
     <properties>
