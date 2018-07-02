@@ -11,4 +11,6 @@ import com.bestcode.mr.order.model.dto.OrderDTO;
 public interface OrderService {
 
     OrderDTO create(OrderDTO orderDTO);
+
+    OrderDTO finish(String orderId);
 }

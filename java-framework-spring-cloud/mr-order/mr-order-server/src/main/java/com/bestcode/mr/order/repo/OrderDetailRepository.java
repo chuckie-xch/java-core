@@ -1,5 +1,7 @@
 package com.bestcode.mr.order.repo;
 
+import java.util.List;
+
 import com.bestcode.mr.order.model.entity.OrderDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -8,4 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @create 2018-06-07 23:39
  **/
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, String> {
+
+    List<OrderDetail> findByOrderId(String orderId);
 }
