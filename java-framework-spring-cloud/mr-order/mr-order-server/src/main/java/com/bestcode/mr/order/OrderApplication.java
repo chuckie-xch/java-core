@@ -9,6 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.retry.annotation.CircuitBreaker;
 
 /**
@@ -22,6 +23,7 @@ import org.springframework.retry.annotation.CircuitBreaker;
 //@SpringBootApplication
 //@EnableEurekaClient
 @SpringCloudApplication
+@ComponentScan(basePackages = "com.bestcode")
 public class OrderApplication {
 
     public static void main(String[] args) {
