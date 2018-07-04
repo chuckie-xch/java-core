@@ -16,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
  * @create 2018-07-04 21:02
  **/
 @RestController
-@RequestMapping("/hystrix")
 @DefaultProperties(defaultFallback = "defaultFallback")
 public class HystrixController {
 

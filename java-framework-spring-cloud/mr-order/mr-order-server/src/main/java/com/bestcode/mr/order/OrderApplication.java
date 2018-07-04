@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Sink;
@@ -23,7 +24,8 @@ import org.springframework.retry.annotation.CircuitBreaker;
 //@SpringBootApplication
 //@EnableEurekaClient
 @SpringCloudApplication
-@ComponentScan(basePackages = "com.bestcode")
+@ComponentScan(basePackages = {"com.bestcode.mr.order", "com.bestcode.product.client"})
+@EnableHystrixDashboard
 public class OrderApplication {
 
     public static void main(String[] args) {
