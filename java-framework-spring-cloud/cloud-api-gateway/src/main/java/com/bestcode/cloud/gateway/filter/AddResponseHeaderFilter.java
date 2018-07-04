@@ -8,11 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import org.springframework.stereotype.Component;
 
 /**
  * @author xch
  * @create 2018-06-27 20:51
  **/
+@Component
 public class AddResponseHeaderFilter extends ZuulFilter {
     @Override
     public String filterType() {

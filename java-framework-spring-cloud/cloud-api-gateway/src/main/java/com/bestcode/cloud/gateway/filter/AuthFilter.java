@@ -12,18 +12,21 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /**
  * @author xch
  * @create 2018-07-03 22:42
  **/
+@Component
 public class AuthFilter extends ZuulFilter {
 
     @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    private RedisTemplate redisTemplate;
 
     @Override
     public String filterType() {
@@ -58,9 +61,9 @@ public class AuthFilter extends ZuulFilter {
         }
         if ("/mr-order/order/finish".equals(request.getRequestURI())) {
             Cookie cookie = CookieUtil.get(request, "token");
-            if (cookie == null || StringUtils.isEmpty(cookie.getValue()) || StringUtils.isEmpty(stringRedisTemplate
+            if (cookie == null || StringUtils.isEmpty(cookie.getValue()) || StringUtils.isEmpty(redisTemplate
                     .opsForValue().get
-                    (String.format(RedisConstant.TOKEN_TEMPLATE, cookie.getValue())))) {
+                            (String.format(RedisConstant.TOKEN_TEMPLATE, cookie.getValue())))) {
                 requestContext.setSendZuulResponse(false);
                 requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
             }

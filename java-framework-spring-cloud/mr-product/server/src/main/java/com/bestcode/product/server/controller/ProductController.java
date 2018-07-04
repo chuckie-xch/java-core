@@ -36,6 +36,7 @@ public class ProductController {
     private CategoryService categoryService;
 
     @GetMapping("/list")
+    @CrossOrigin(allowCredentials = "true")
     public ResultVO<ProductVO> list() {
         List<ProductInfo> productInfos = productService.findUpAll();
         List<Integer> categoryTypeList = productInfos.stream().map(ProductInfo::getCategoryType).collect(Collectors
