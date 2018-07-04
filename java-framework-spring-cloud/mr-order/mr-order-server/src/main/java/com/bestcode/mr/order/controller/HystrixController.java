@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @DefaultProperties(defaultFallback = "defaultFallback")
 public class HystrixController {
 
-    @GetMapping("/getProductInfoList")
+
 //    @HystrixCommand(fallbackMethod = "fallback")
     /**
      * 超时配置
@@ -28,12 +28,18 @@ public class HystrixController {
      * @HystrixCommand(commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",
      * value = "3000")})
      */
-    @HystrixCommand(commandProperties = {
-            @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),// 设置熔断
-            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
-            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "1000"),
-            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60")
-    })
+    /**
+     * 断路配置
+     * @HystrixCommand(commandProperties = {
+     * @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),// 设置熔断
+     * @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+     * @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "1000"),
+     * @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60")
+     * })
+     *
+     */
+    @HystrixCommand(commandKey = "findProductInfoList")
+    @GetMapping("/getProductInfoList")
     public String getProductInfoList(@RequestParam("number") Integer number) {
         if (number % 2 == 0) {
             return "success";
