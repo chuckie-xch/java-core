@@ -53,9 +53,10 @@ public class UserController {
         userRepository.deleteById(id);
     }
 
-    @GetMapping("/page")
-    public Page<User> findAllByPage() {
-        return userPagingAndSortingRepository.findAll(PageRequest.of(1, 20, new Sort(Sort.Direction.ASC, "name")));
+    @PostMapping("/findByPage")
+    public Page<User> findAllByPage(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
+        return userPagingAndSortingRepository.findAll(PageRequest.of(pageNum, pageSize, new Sort(Sort.Direction.DESC,
+                "id")));
     }
 
 }

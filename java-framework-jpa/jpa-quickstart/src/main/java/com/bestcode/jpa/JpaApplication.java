@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2018.07.10
  */
 @SpringBootApplication
+
 public class JpaApplication {
 
     public static void main(String[] args) {
