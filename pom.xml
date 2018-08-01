@@ -19,7 +19,7 @@
         <module>java-framework-xxl-job</module>
         <module>java-component-task</module>
         <module>java-framework-spring-cloud</module>
-        <module>java-framework-spring-jpa</module>
+        <module>java-framework-jpa</module>
         <module>java-framework-netty</module>
     </modules>
     <packaging>pom</packaging>
