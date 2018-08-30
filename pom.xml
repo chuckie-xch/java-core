@@ -19,8 +19,9 @@
         <module>java-framework-xxl-job</module>
         <module>java-component-task</module>
         <module>java-framework-spring-cloud</module>
-        <module>java-framwork-netty</module>
         <module>java-framework-jpa</module>
+        <module>java-framework-netty</module>
+        <module>java-framework-cache</module>
     </modules>
     <packaging>pom</packaging>
 
