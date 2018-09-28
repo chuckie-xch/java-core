@@ -22,6 +22,7 @@
         <module>java-framework-jpa</module>
         <module>java-framework-netty</module>
         <module>java-framework-cache</module>
+        <module>java-cache-redis</module>
     </modules>
     <packaging>pom</packaging>
 
